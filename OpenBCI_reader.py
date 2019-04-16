@@ -1,4 +1,5 @@
 import socket
+import binascii
 
 print("i tried")
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -9,6 +10,8 @@ host = "127.0.0.1"
 port = 12345
 s.bind((host,port))
 
+
+#Main loop for when Server Open!
 while True:
    try:
         try:
@@ -17,12 +20,24 @@ while True:
             print ("the data is below:")
             #BCIData = s.recv(2048)
             #decode = BCIData.decode('UTF-8')
-            print (data)
+            print (data, addr)
+            print(type(data))
+            decode_all = data.decode("UTF-8")
+            decode_all = decode_all.split("[")
+            decode_all[1] = decode_all[1].strip()
+            decode_all[1] = decode_all[1].strip(']}')
+            vals = decode_all[1].split(',')
+            print(vals)
+            #print (vals[0], '|',vals[1])
         except socket.timeout:
             print('REQUEST TIMED OUT')
 
-        print("runnin'")
-      
+        #print("runnin'")
+     
+
+
+
+
    except KeyboardInterrupt:
       # quit
       print('the control c')
