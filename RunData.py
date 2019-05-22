@@ -1,14 +1,9 @@
 import socket
-import binascii
-# import matplotlib.pyplot as plt
 import numpy as np
 from time import sleep
 
-#OPTING NOT TO MESS WITH PLOTTING RIGHT NOW IN FAVOR OF USING TKINTER GUI
-
 #Main loop for when Server Open!
-def RunData():
-   global x,y,th,test,s
+def RunData(test, s, th, x, y):
    try:
         if test == 0:
           try:
@@ -43,50 +38,10 @@ def RunData():
           muscle = False
 
         
-        sleep(1)  
-        return muscle
-
-
-
-
-        #print("runnin'")
-     
-
-
-
-
+        #sleep(1)  
+        return [muscle, x, y]
    except KeyboardInterrupt:
       # quit
       print('the control c')
       s.close()
       sys.exit(0)
-
-###### SETUP CONTENT      
-print("i tried")
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-s.settimeout(1.0)
-# Match with OpenBCI_GUI
-host = "127.0.0.1"
-port = 12345
-s.bind((host,port))
-
-# 0 for data stream
-# 1 for rand testing
-test = 1
-
-#threshold for ON ::: Need to test for this
-th = 0.5
-x = np.array([1,1])
-y = np.array([0,0])
-# fig = plt.figure()
-
-
-while True:
-  muscle = RunData()
-  print(muscle)
-  print(x, 'and', y)
-
-
-
-   
