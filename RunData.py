@@ -23,14 +23,16 @@ def RunData(test, s, th, x, y):
             #print (vals[0], '|',vals[1])
           except socket.timeout:
             print('REQUEST TIMED OUT')
+            vals = [0,0,0,0]
         elif test == 1: #move the stuff in here to time out as well
           vals = [0.1,0,0,0]
           print(x ,' and ', y)
 
         y = np.append(y,vals[0])
         x = np.append(x,vals[1])
+        y = y.astype('float')
 
-        if np.mean(y[-10::]) >= th:
+        if np.mean(np.abs(y[-10::])) >= th:
           #print("Above threshold")
           muscle = True
         else:
